@@ -12,7 +12,7 @@ clients_bp = Blueprint("clients", __name__)
 # GET /clients — fetch all clients
 # --------------------------------------------------
 @clients_bp.route("/clients", methods=["GET"])
-@require_api_key
+@require_api_key # grabs incoming request automatically
 def get_clients():
     conn = get_connection()
     rows = conn.execute("SELECT * FROM clients").fetchall()

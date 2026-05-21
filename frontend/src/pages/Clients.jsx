@@ -4,7 +4,7 @@ import ClientCard from "../components/ClientCard";
 
 export default function Clients() {
   // Three states every data-fetching component needs
-  const [clients, setClients] = useState([]);   // the data
+  const [clients, setClients] = useState([]);   // the data (ID/COMPANY_NAME/SERVICE_TYPE/CONTACT_EMAIL)
   const [loading, setLoading] = useState(true); // are we waiting?
   const [error,   setError]   = useState(null); // did something go wrong?
 
@@ -23,7 +23,7 @@ export default function Clients() {
       setLoading(true);
       setError(null);
       const data = await getClients();
-      setClients(data);
+      setClients(data);  // Stays in Clients hook. Use to render Client's data in components.
     } catch (err) {
       setError(err.message);
     } finally {

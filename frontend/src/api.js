@@ -9,8 +9,8 @@ const headers = {
 
 // Helper — centralises error handling for every request
 async function request(path, options = {}) {
-    // make response to the flask server for API data.
-    // Here Frontend talks with backend by using fetch
+    // make request to the flask server for API data.
+    // Here Frontend talks with backend by using fetch. Using a simple get request and returning a promised data
   const response = await fetch(`${BASE_URL}${path}`, {
     ...options,
     headers,
