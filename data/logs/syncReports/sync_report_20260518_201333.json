@@ -1,0 +1,9 @@
+{
+  "ran_at": "2026-05-18T20:13:33.583224",
+  "script": "sync_clients.py",
+  "result": {
+    "synced": 5,
+    "failed": 0,
+    "errors": []
+  }
+}
