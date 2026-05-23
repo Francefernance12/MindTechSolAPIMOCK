@@ -3,6 +3,7 @@ import os
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "database.db")
 
+# Important to connect DB across Flask
 def get_connection() -> sqlite3.Connection:
     """Returns a connection with foreign key enforcement enabled."""
     conn = sqlite3.connect(DB_PATH)
@@ -10,6 +11,7 @@ def get_connection() -> sqlite3.Connection:
     conn.execute("PRAGMA foreign_keys = ON") # enables foreign key constraints
     return conn
 
+# Database Schema
 def create_tables() -> None:
     conn: sqlite3.Connection = get_connection()
     cursor: sqlite3.Cursor = conn.cursor() # allows you to execute SQL commands
