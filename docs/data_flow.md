@@ -100,3 +100,4 @@ Inside `ClientCard.jsx`, the data is accessed via the `client` prop:
 - `client.company_name`
 - `client.contact_email`
 - `client.service_type`
+
