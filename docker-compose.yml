@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - API_KEY=mindtech-dev-key-123
+    # Use a volume for the database if you want it to persist across runs
+    # volumes:
+    #   - ./backend/database.db:/app/database.db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+# This setup allows you to:
+# 1. Run 'docker-compose up --build'
+# 2. Access the frontend at http://localhost:8080
+# 3. The frontend will communicate with the backend at http://localhost:5000 (via your host machine)
