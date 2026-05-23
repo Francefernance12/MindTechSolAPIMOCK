@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 venv/
 env/
+backend/.env
 .env
 .venv
 build/
@@ -28,3 +29,14 @@ yarn-error.log*
 .idea/
 *.swp
 *.swo
+
+
+backend/database.db
+backend/logs/
+logs/sync_report_*.json
+__pycache__/
+*.pyc
+node_modules/
+
+/logs/mindtech.log
+/logs/syncReports/*
