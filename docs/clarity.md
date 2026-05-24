@@ -7,7 +7,7 @@ This document explains some of the behaviors in the MindTechSolAPIMOCK system th
 In the `jobs` table, the `client_id` column is optional (nullable). You will often see `NULL` (or `null` in JSON) for certain entries.
 
 ### Reasons for `NULL` client_id:
-- **System-Wide Jobs**: Some scripts, like `sync_clients.py`, process the entire database or external files rather than acting on a single specific client. When a job represents a global action, it is logged with `client_id = NULL`.
+- **System-Wide Jobs**: Some scripts, like `sync_clients.py`, process the entire database or external files like CSVs rather than acting on a single specific client. When a job represents a global action, it is logged with `client_id = NULL`.
 - **Pre-Validation Failures**: If a job is intended for a specific client but fails before the client can be identified or validated in the database, the log entry might default to `NULL`.
 - **Automated Syncs**: The daily/hourly sync jobs typically update many clients at once. Instead of creating 100 job logs (one for each client), the system logs one "Sync" event with a summary message and a `NULL` client ID.
 
