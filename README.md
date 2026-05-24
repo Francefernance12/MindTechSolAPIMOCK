@@ -24,6 +24,7 @@ Detailed documentation for various aspects of the system can be found in the `do
 - [Developer Guide](docs/developer_guide.md): Information for developers on setting up and contributing to the project.
 - [Structure and Flow](docs/structure_and_flow.md): In-depth look at the codebase organization and logical flow.
 - [Structured Code Review](docs/structured_code_review.md): Results and notes from architectural code reviews.
+- [Clarity to Common Confusions](docs/clarity.md): Explanations for common points of confusion (e.g., NULL IDs, repetitive logs).
 
 ## Setup
 

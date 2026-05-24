@@ -69,8 +69,6 @@ def seed() -> None:
 
 # -------------------------------------------------------
 # TRANSACTIONS
-# Pretend we're syncing clients from a remote source.
-# Transactions are like methods or functions in programming terms.
 # They maintain data integrity by ensuring that either all operations succeed or none do.
 # -------------------------------------------------------
 # A transaction bundles multiple writes into one atomic unit.
@@ -117,9 +115,10 @@ if __name__ == "__main__":
     seed()
 
     print("\n--- Logging jobs (transactions) ---")
-    log_job_for_client(1, "sync_clients.py", "success", "Synced 42 rows")
-    log_job_for_client(2, "sync_clients.py", "failed",  "Timeout after 30s")
-    log_job_for_client(99, "sync_clients.py", "success", "This should roll back")
+    #  Hardcoded test data to test transaction rollback
+    log_job_for_client(1, "sync_clients.py", "success", "TRANSACTION TEST: Synced 42 rows")
+    log_job_for_client(2, "sync_clients.py", "failed",  "TRANSACTION TEST: Timeout after 30s")
+    log_job_for_client(99, "sync_clients.py", "success", "TRANSACTION TEST: This should roll back")
 
     print("\n--- All job logs ---")
     conn = get_connection()

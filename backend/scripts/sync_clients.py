@@ -33,11 +33,13 @@ def notify_fatal(script_name: str, error: str):
 def read_csv(path: str) -> list[dict]:
     rows = []
     try:
+        # Read CSV file to format as list of dictionaries
         with open(path, newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 rows.append(row)
         logger.info(f"Read {len(rows)} rows from {path}")
+        # Error handling
     except FileNotFoundError:
         logger.error(f"CSV not found: {path}")
         raise
@@ -49,16 +51,18 @@ def read_csv(path: str) -> list[dict]:
 
 def validate_rows(rows: list[dict]) -> list[dict]:
     valid = []
-    seen_emails = set()
+    seen_emails = set() # Ensure no duplicate emails
     for row in rows:
-        email = row.get("contact_email", "").strip()
-        name  = row.get("company_name",  "").strip()
+        email = row.get("contact_email", "").strip() # Get email and strip whitespace
+        name  = row.get("company_name",  "").strip() # Get company name and strip whitespace
+
         if not name or not email:
             logger.warning(f"Skipping row with missing fields: {row}")
             continue
         if email in seen_emails:
             logger.warning(f"Skipping duplicate email in CSV: {email}")
             continue
+
         seen_emails.add(email)
         valid.append({
             "company_name":  name,
@@ -79,20 +83,21 @@ def upsert_clients(rows: list[dict]) -> dict:
             try:
                 conn.execute("""
                     INSERT INTO clients (company_name, contact_email, service_type)
-                    VALUES (:company_name, :contact_email, :service_type)
+                    VALUES (:company_name, :contact_email, :service_type) 
                     ON CONFLICT(contact_email)
                     DO UPDATE SET
                         company_name = excluded.company_name,
                         service_type = excluded.service_type
                 """, row)
                 synced += 1
+
             except sqlite3.IntegrityError as e:
                 failed += 1
                 errors.append(str(e))
                 logger.error(f"Integrity error on {row['contact_email']}: {e}")
 
         status  = "success" if failed == 0 else "failed"
-        message = f"Synced {synced}, failed {failed}"
+        message = f"CSVFile: Synced {synced}, failed {failed}"
         if errors:
             message += f" | {'; '.join(errors)}"
 
